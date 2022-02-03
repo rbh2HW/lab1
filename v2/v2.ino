@@ -50,13 +50,9 @@ Serial.print("push button 1");
 Serial.print(pushButton1Boolean);
 
 
-if (pushButton1Boolean==1)
-    {
-        //disable stream of pulses
-        return;
-    }
-else
-    {
+while(pushButton1Boolean==0)
+   {
+
 
     if (pushButton2Boolean) //this is the condition for the mode selection,
         {
@@ -91,8 +87,8 @@ else
 
 
 
-    }
+    
 
 
-
+   }
 }
