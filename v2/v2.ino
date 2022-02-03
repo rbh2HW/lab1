@@ -74,28 +74,18 @@ else
 
             for (int i = 1; i <= paramPulses; i++) 
             {
-                if (i==1) //since first iteration doesn't need 0.5milliseconds added, it is split into a if/else
+                if (i!=1) //since first iteration doesn't need 0.5milliseconds added, it is split into a if/else
                     {
-                        digitalWrite(SignalA, HIGH);
-
-                        delay(paramA);
-
-                        digitalWrite(SignalA, LOW);
-                        delay(paramB);
-
-                      }
-                      else
-                      {
+                      paramA=paramA+0.5; //adding 0.5milisec for each iteration
 
 
-                        paramA=paramA+0.5; //adding 0.5milisec for each iteration
-                        digitalWrite(SignalA, HIGH);
+                    }
+                     
+                 digitalWrite(SignalA, HIGH);
+                 delay(paramA);
 
-                        delay(paramA);
-
-                        digitalWrite(SignalA, LOW);
-                        delay(paramB);
-                       } 
+                 digitalWrite(SignalA, LOW);
+                 delay(paramB);
 
             }
 
