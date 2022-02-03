@@ -60,10 +60,26 @@ int pushButton1Boolean=0;
     
     //modified
    for (int i = 1; i <= (paramPulses+3); i++) {
-      digitalWrite(SignalA, HIGH);
-  delay(paramA+0.5);
+    if (i==1)
+    {
+    digitalWrite(SignalA, HIGH);
+      
+  delay(paramA);
+  
   digitalWrite(SignalA, LOW);
   delay(paramB);
+      
+    }else{
+      
+    
+    paramA=paramA+0.5;
+    digitalWrite(SignalA, HIGH);
+      
+  delay(paramA);
+  
+  digitalWrite(SignalA, LOW);
+  delay(paramB);
+   }
 
   }
 
