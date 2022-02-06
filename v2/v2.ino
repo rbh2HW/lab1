@@ -89,6 +89,6 @@ while(pushButton1Boolean==0)
 
     
 
-
+      pushButton1Boolean=digitalRead(pushButton1);
    }
 }
