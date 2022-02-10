@@ -47,7 +47,7 @@ void loop() {
 
   
 
-  while (pushButton1Boolean == 0) {
+  while (pushButton1Boolean == 0) {//while the first pushbutton is not pressed then the program can run
     
  
   
