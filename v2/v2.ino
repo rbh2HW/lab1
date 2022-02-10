@@ -4,14 +4,20 @@
 #define SignalA 15 //GPIO15
 
 
-#define paramMode 2
 
-#define paramBlockSpace
+int signalBDelay=0.05;
+int  addition_To_A=0.05;
 
-float paramA;
-int paramPulses;
-float paramB;
-float paramD;
+
+float  paramB =0.1; //100micro
+float   paramD=0.55; //550 micro
+float  paramA = 0.8; //80 micro
+int paramPulses = 13; //13 iterations
+
+//settting up temp perameters
+int tempParamA;
+int tempParamB;
+int tempParamD;
 
 void setup() {
 
@@ -24,11 +30,6 @@ void setup() {
 }
 
 void loop() {
-   paramB =0.1;
-   paramD=5.5;
-  // put your main code here, to run repeatedly:
-  paramA = 0.8; //non const wait period for signal to be high
-  paramPulses = 13; //non const amount of pulses in required loop
 
   //instatiating pushbutton booleans
   int pushButton2Boolean = 0;
@@ -52,42 +53,45 @@ void loop() {
   
     if (pushButton2Boolean) //this is the condition for the mode selection,
     {
-      paramB=0.05;
-      paramD=2.75; //paramD/2 = 5.5/2=2.75
+      //following divides the parameters when the mode has been selected
+      int tempParamB=paramB/2;
+      int tempParamD=paramD/2; //paramD/2 = 5.5/2=2.75
       
-      //paramPulses = paramPulses + 3; // if the button is presse then it adds 3 pulses to the amount of iterations required
+      
     } else {
-      paramB=0.1;
-      paramD=5.5;
-     // paramPulses = 13;
+      //the following resets the temp perameters
+      int tempParamB=paramB;
+      int tempParamD=paramD;
+     
     }
 
     digitalWrite(SignalB, HIGH); //starting signal
-    delay(0.05); //starting signal
+    delay(signalBDelay); //starting signal
     digitalWrite(SignalB, LOW); //starting signal
     
     
     for (int i = 1; i <= paramPulses; i++) {
       if (i != 1) //since first iteration doesn't need 0.5milliseconds added, it is split into a if/else
       {
-        paramA = paramA + 0.05; //adding 0.5milisec for each iteration
+        int tempParamA = paramA + (addition_To_A*(i-1)); //adding 0.5milisec for each iteration
 
       }
+      else{
+        int tempParamA=paramA; //makes sure to reset the value of the temp value 
+      }
+      
 
       digitalWrite(SignalA, HIGH);
-      delay(paramA);
+      delay(tempParamA);
 
       digitalWrite(SignalA, LOW);
-      delay(paramB);
+      delay(tempParamB);
 
     }
-    delay(paramD);
+    delay(tempParamD);
     //updating condition for while loop - button pressed
          pushButton2Boolean = digitalRead(pushButton2);
   pushButton1Boolean = digitalRead(pushButton1);
   }
-  //    digitalWrite(SignalB, HIGH); //starting signal
-   // delay(0.05); //starting signal
-    //digitalWrite(SignalB, LOW); //starting signal
-   // delay(0.05); //starting signal
+
 }
