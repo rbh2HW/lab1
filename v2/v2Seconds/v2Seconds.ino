@@ -69,7 +69,7 @@ void loop() {
     digitalWrite(SignalB, HIGH); //starting signal
     delay(signalBDelay); //starting signal
     digitalWrite(SignalB, LOW); //starting signal
-    delay(signalBDelay); //starting signal
+    
     
     for (int i = 1; i <= paramPulses; i++) {
       if (i != 1) //since first iteration doesn't need 0.5milliseconds added, it is split into a if/else
@@ -77,6 +77,10 @@ void loop() {
         tempParamA = paramA + (5*(i-1)); //adding 0.5milisec for each iteration
 
       }
+      else{
+        tempParamA=paramA; //makes sure to reset the value of the temp value 
+      }
+      
 
       digitalWrite(SignalA, HIGH);
       delay(tempParamA);
